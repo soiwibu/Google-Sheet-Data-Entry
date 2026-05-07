@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-controls">
+                <button id="toggle-mode-btn">Switch to Edit Mode</button>
+                <button id="pull-recent-btn" class="secondary-btn">Edit Last Entry</button>
+            </div>
+            <div id="mode-indicator" class="mode-entry">Current Mode: New Entry</div>
+        </div>
+
+        <form id="invoice-form">
+            <div id="search-section" class="hidden">
+                <div class="form-group">
+                    <label for="search-invoice">Search by Invoice #</label>
+                    <input type="text" id="search-invoice">
+                </div>
+                <div class="form-group">
+                    <label for="search-customer">Search by Customer Name</label>
+                    <input type="text" id="search-customer">
+                </div>
+                <button type="button" id="search-btn">Search Database</button>
+                
+                <div id="results-container" class="hidden">
+                    <label>Select an Invoice to Edit:</label>
+                    <div id="results-list" class="results-grid"></div>
+                </div>
+            </div>
+
+            <div id="main-fields">
+                <div class="form-group">
+                    <label for="invoice" id="invoice-label">Invoice #</label>
+                    <input type="text" id="invoice" required>
+                </div>
+
+                <div id="secondary-fields">
+                    <div class="form-group">
+                        <label for="customer">Customer Name</label>
+                        <input type="text" id="customer" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" rows="3" required></textarea>
+                    </div>
+
+                    <div id="cost-fields">
+                        <div class="form-group">
+                            <label for="labour">Labour Cost</label>
+                            <input type="number" id="labour" step="0.01" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fabric">Fabric Cost</label>
+                            <input type="number" id="fabric" step="0.01" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subtotal">Sub-Total</label>
+                            <input type="text" id="subtotal" readonly>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hst">HST (13%)</label>
+                            <input type="text" id="hst" readonly>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="total">Total</label>
+                            <input type="text" id="total" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" id="submit-btn">Submit New Entry</button>
+        </form>
+
+        <div id="loading-overlay" class="hidden">Processing...</div>
+    </div>
+</body> 
+</html>

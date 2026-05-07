@@ -1,0 +1,215 @@
+/* =========================================
+   COLOR PALETTE SELECTION
+   Uncomment the block you want to use.
+   ========================================= */
+
+/* 1. THE MODERN ENTERPRISE (Active Default) */
+:root {
+    --primary-color: #4F46E5;    /* Indigo */
+    --entry-color: #10B981;      /* Emerald Success */
+    --edit-color: #F59E0B;       /* Amber Warning */
+    --bg-color: #F8FAFC;         /* Light Slate BG */
+    --card-bg: #ffffff;
+    --info-color: #0EA5E9;       /* Sky Blue */
+    --secondary-btn: #64748B;    /* Slate */
+    --text-main: #1E293B;
+}
+
+/* 2. THE NORDIC DARK (Uncomment to use) 
+:root {
+    --primary-color: #818CF8;
+    --entry-color: #34D399;
+    --edit-color: #FB923C;
+    --bg-color: #0F172A;
+    --card-bg: #1E293B;
+    --info-color: #94A3B8;
+    --secondary-btn: #334155;
+    --text-main: #F1F5F9;
+}
+*/
+
+/* 3. THE MINIMALIST PAPER (Uncomment to use)
+:root {
+    --primary-color: #374151;
+    --entry-color: #606C38;
+    --edit-color: #BC6C25;
+    --bg-color: #FEFAE0;
+    --card-bg: #F9F7F2;
+    --info-color: #6B7280;
+    --secondary-btn: #A3A3A3;
+    --text-main: #283618;
+}
+*/
+
+/* =========================================
+   CORE STYLES
+   ========================================= */
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px; /* Slightly smoother corners */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 15px;
+}
+
+.header-controls {
+    display: flex;
+    gap: 10px;
+}
+
+#toggle-mode-btn, .secondary-btn {
+    flex: 1;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+    transition: filter 0.2s;
+}
+
+#toggle-mode-btn { background: var(--primary-color); }
+.secondary-btn { background: var(--secondary-btn); }
+
+#toggle-mode-btn:hover, .secondary-btn:hover {
+    filter: brightness(1.1);
+}
+
+#mode-indicator {
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+.mode-entry { background: var(--entry-color); }
+.mode-edit { background: var(--edit-color); color: #333 !important; }
+
+.form-group { margin-bottom: 18px; }
+label { display: block; font-weight: 600; margin-bottom: 6px; color: var(--text-main); font-size: 14px; }
+
+input, select, textarea { 
+    width: 100%; 
+    padding: 12px; 
+    border: 1px solid rgba(0,0,0,0.15); 
+    border-radius: 6px; 
+    font-size: 14px; 
+    background: var(--card-bg);
+    color: var(--text-main);
+}
+
+input[readonly] { 
+    background: rgba(0,0,0,0.03); 
+    border-color: transparent; 
+    color: var(--text-main); 
+    opacity: 0.8;
+}
+
+#search-section {
+    background: rgba(0,0,0,0.02);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+#search-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--info-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#results-container { margin-top: 25px; }
+
+.results-grid {
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 6px;
+    background: var(--card-bg);
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.result-item:hover {
+    background: rgba(0,0,0,0.03);
+    color: var(--primary-color);
+}
+
+#submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--entry-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer; 
+    margin-top: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#submit-btn.btn-edit { background: var(--edit-color); color: #333; }
+
+.hidden { display: none !important; }
+
+#loading-overlay {
+    position: absolute;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(2px);
+    display: flex; justify-content: center; align-items: center;
+    font-weight: bold;
+    border-radius: 12px;
+    z-index: 100;
+}
+
+textarea {
+    font-family: inherit;
+    resize: vertical;
+    min-height: 80px;
+}
+
+textarea:focus, input:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: -1px;
+}
